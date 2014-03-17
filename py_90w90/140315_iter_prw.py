@@ -77,8 +77,8 @@ for i,L in enumerate(Ls):
 		A[i,j] = delta[j]*delta[j]*(p[i,j]**5)*Fty
 		#print A
 		sum_A = (kbT/(12.*np.pi)) * np.sum(A, axis = 1)
-np.savetxt('140316_91w91_prw_sum_A.txt',sum_A)
-np.savetxt('140316_91w91_prw_Ls.txt',Ls)
+np.savetxt('140316_90w90_prw_sum_A.txt',sum_A)
+np.savetxt('140316_90w90_prw_Ls.txt',Ls)
 
 pl.figure()
 pl.loglog(Ls,sum_A)
