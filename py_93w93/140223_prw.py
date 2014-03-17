@@ -88,27 +88,39 @@ for k,length in enumerate(ls):
 	sum_A_2 = np.empty(len(ls))
 
 	for j,n in enumerate(ns):
-		# Integral:
-		g0dt = g0(aiz[j],eiz_w[j],length,n, H, T)
-		G0dt = trapz(g0dt, x=ts, axis = 0)
-		G0   = trapz(G0dt, hs)
+	
 
-		g2dt = g2(aiz[j],eiz_w[j],length,n, H, T)
-		G2dt = trapz(g2dt, x = ts, axis = 0)#(aiz[j],eiz_w[j],length,n, H, T),T)
-		G2   = trapz(G2dt,hs)
+#	for h in hs:
+	#		term1 = 1./np.sqrt(h**2-1)
+	#		for t in ts:
+	#			intermediate_integral(t,h) += np.exp(-2.0 * h * np.sqrt(eiz_w)* length * coeff * n / c * np.sqrt(t*t + 1.0))*((t/ np.sqrt(t*t+1.0)) + ( t**4 * 2.0*(1. + 3.*a)*(1.+3.*a)) + ( t**2 * 4.0*(1. + 2.0*a+2.0*a+3.0*a*a)) + (4.0*(1. + a)*(1.0 + a)))
 
-		#print 'dt Integral   G0 = ',i,k,j, G0
-		#print 'dt Integral G2 = ',i,k,j, G2
-		#print '----'
-		#print 'N terms for A0 = '  , As(eiz_z[j],eiz_w[j],length,n,G0)
-		#print 'N terms for A2 = ', A_2s(eiz_z[j],eiz_w[j],length,n,y_2)
-		#print '----'
+	#		h_integrand += term1*intermediate_integral()
+
+	#			g0dt = g0(aiz[j],eiz_w[j],length,n,h, t)
+	#
+	#			g2dt = g2(aiz[j],eiz_w[j],length,n, H, T)
+
+	#	## Integral:
+	#	#g0dt = g0(aiz[j],eiz_w[j],length,n, H, T)
+	#	#G0dt = trapz(g0dt, x=ts, axis = 1)
+	#	#G0   = trapz(G0dt, x=hs)
+
+	#	#g2dt = g2(aiz[j],eiz_w[j],length,n, H, T)
+	#	#G2dt = trapz(g2dt, x=ts, axis = 1)#(aiz[j],eiz_w[j],length,n, H, T),T)
+	#	#G2   = trapz(G2dt, x=hs)
+	#	#print 'dt Integral   G0 = ',i,k,j, G0
+	#	#print 'dt Integral G2 = ',i,k,j, G2
+	#	#print '----'
+	#	#print 'N terms for A0 = '  , As(eiz_z[j],eiz_w[j],length,n,G0)
+	#	#print 'N terms for A2 = ', A_2s(eiz_z[j],eiz_w[j],length,n,y_2)
+	#	#print '----'
 
 		A[j,k]   =   As(eiz_z[j],eiz_w[j],length,n,G0)
 		A_2[j,k] = A_2s(eiz_z[j],eiz_w[j],length,n,G2)# * np.cos(2.0*theta)  		
 
-	A[0,k] = (1./2)*A[0,k]      
-	A_2[0,k] = (1./2)*A_2[0,k]  
+	A[0,k]   *= 0.5  
+	A_2[0,k] *= 0.5
 
 	sum_A = np.sum(A,axis=0)
 

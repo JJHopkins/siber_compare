@@ -23,10 +23,12 @@ eiz_y = np.loadtxt('data/eiz_y_output_eV.txt')
 eiz_z = np.loadtxt('data/eiz_z_output_eV.txt') # parallel,axial
 #eiz_w = 1.0 + np.zeros(len(eiz_z))
 eiz_w = np.loadtxt('data/eiz_w_output_eV.txt') # water as intervening medium
-eiz_w[0] = eiz_w[1] #NOTE: there is a jump from first val down to second val
+#eiz_w[0] = eiz_w[1] #NOTE: there is a jump from first val down to second val
 
-gh_len0, gh_A0 = np.loadtxt('data/65-w-65-500nmA0.txt',unpack=True, usecols = [0,1]) # water as intervening medium
-gh_len2, gh_A2 = np.loadtxt('data/65-w-65-500nmA2.txt',unpack=True, usecols = [0,1]) # water as intervening medium
+x90_A0, y90_A0 = np.loadtxt('data/65-W-65-PERPA0.PRN',unpack=True, usecols = [0,1]) # water as intervening medium
+x90_A2, y90_A2 = np.loadtxt('data/65-W-65-PERPA2.PRN',unpack=True, usecols = [0,1]) # water as intervening medium
+#gh_len0, gh_A0 = np.loadtxt('data/65-w-65-500nmA0.txt',unpack=True, usecols = [0,1]) # water as intervening medium
+#gh_len2, gh_A2 = np.loadtxt('data/65-w-65-500nmA2.txt',unpack=True, usecols = [0,1]) # water as intervening medium
 
 r_1 = 1.0e-9
 r_2 = 1.0e-9
@@ -170,19 +172,19 @@ pl.figure()
 pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A  ,'b-', label = r'$\mathcal{A^{(0)}}(\ell)$')
 pl.loglog(1e9*ls,(1e21*kb*Temp/32)*sum_A_2,'g-', label = r'$\mathcal{A^{(2)}}(\ell)$')
 
-pl.loglog(gh_len0, gh_A0,'k-' , label = r'GH $\mathcal{A^{(0)}}(\ell)$')
-pl.loglog(gh_len2, gh_A2,'k--', label = r'GH $\mathcal{A^{(2)}}(\ell)$')
+pl.loglog(x90_A0, y90_A0,'k-' , label = r'GH $\mathcal{A^{(0)}}(\ell)$')
+pl.loglog(x90_A2, y90_A2,'k--', label = r'GH $\mathcal{A^{(2)}}(\ell)$')
 
 pl.xlabel(r'$\mathrm{separation}\,\ell\,\,\,\rm{[nm]}$', size = 20)
 pl.ylabel(r'$\mathrm{\mathcal{A^{(0)},\,\,A^{(2)}}}\,\,\,\rm{[zJ]}$', size = 20)
 #pl.title(r'$\mathrm{Hamaker \, coeff.s \,:\,skewed,\,retarded,\,water}$', size = 20)
-pl.legend(loc = 'best')
+#pl.legend(loc = 'best')
 #pl.axis([1e-9,1e-6,1e-24,1e-19])
 pl.minorticks_on()
 pl.ticklabel_format(axis = 'both')
 pl.grid(which = 'both')
 pl.tick_params(which = 'both',labelright = True)
-pl.savefig('plots/skew_ret_water/140306_65w65_GH_skew_ret_A0_A2.pdf')
+pl.savefig('plots/skew_ret_water/140309_65w65_GH_skew_ret_A0_A2.pdf')
 show()
 
 pl.figure()
